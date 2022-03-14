@@ -20,8 +20,7 @@ CLEAN := $(venv) $(CLEAN)
 $(python):
   # Special case, directory isn't a good make target
 	python -m venv $(venv)
-	$(pip) install -U pip
-	$(pip) install pip-tools~=6.0
+	$(pip) install -U pip pip-tools~=6.0
 
 requirement%.txt: requirement%.in $(python)
 	$(venv)/bin/pip-compile $<
@@ -35,7 +34,7 @@ dev: .dev  ## run dev server
 	$(python) -m uvicorn main:app --reload
 
 clean:  ## clean all intermediate targets
-	rm -f $(CLEAN)
+	rm -rf $(CLEAN)
 
 
 # end
