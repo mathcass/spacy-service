@@ -1,0 +1,12 @@
+FROM "python:3.8-bullseye"
+    MAINTAINER Cass <cass@petrus.me>
+RUN python -m pip install --no-cache-dir \
+    spacy==2.1.9 \
+    https://github.com/explosion/spacy-models/releases/download/en_core_web_md-2.1.0/en_core_web_md-2.1.0.tar.gz \
+    fastapi \
+    uvicorn
+
+RUN mkdir /app
+WORKDIR /app
+COPY scripts/main.py /app
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0"]

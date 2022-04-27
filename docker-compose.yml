@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  spacy2:
+    build:
+      context: .
+      dockerfile: Dockerfile.spaCy2
+    image: "spacy-service:spacy-2"
+    ports:
+      - "1985:8000"
+  spacy3:
+    build:
+      context: .
+      dockerfile: Dockerfile.spaCy3
+    image: "spacy-service:spacy-3"
+    ports:
+      - "1986:8000"
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    image: "spacy-service:streamlit"
+    ports:
+      - "8501:8501"
+    depends_on:
+      - spacy2
+      - spacy3
+    environment:
+      "SPACY2_URL": "http://spacy2:8000"
+      "SPACY3_URL": "http://spacy3:8000"

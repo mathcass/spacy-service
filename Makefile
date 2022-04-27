@@ -33,6 +33,13 @@ CLEAN := .dev $(CLEAN)
 dev: .dev  ## run dev server
 	$(python) -m uvicorn main:app --reload
 
+streamlit: .dev
+	$(python) -m streamlit run scripts/streamlit.py
+
+serve-docker: .dev  ## run multiple servers in docker
+	docker-compose build
+	docker-compose up
+
 clean:  ## clean all intermediate targets
 	rm -rf $(CLEAN)
 
