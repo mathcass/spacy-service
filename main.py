@@ -16,19 +16,12 @@ async def root():
     return {"message": "Hello World"}
 
 
+@app.get("/lemmas")
+@app.post("/lemmas")
 async def lemmas(text: str):
     lemmas = (token.lemma_ for token in nlp(text))
     return {"lemmas": list(lemmas)}
 
-
-app.get("/lemmas")(lemmas)
-app.post("/lemmas")(lemmas)
-
-
-# lemma_
-# pos_ (upos)
-# i (token index)
-# idx the index (in chars) of the token start
 
 class SyntaxToken(BaseModel):
     begin_offset: int

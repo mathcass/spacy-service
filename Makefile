@@ -18,9 +18,9 @@ notebook: .dev  ## launch Jupyter Lab
 
 CLEAN := $(venv) $(CLEAN)
 $(python):
-  # Special case, directory isn't a good make target
+	# Special case, directory isn't a good make target
 	python -m venv $(venv)
-	$(pip) install -U pip pip-tools~=6.0
+	$(pip) install -U pip pip-tools~=7.0
 
 requirement%.txt: requirement%.in $(python)
 	$(venv)/bin/pip-compile $<
